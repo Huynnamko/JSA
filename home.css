@@ -1,0 +1,319 @@
+/* ===================================================================
+   home.css – MODERN / VIBRANT / ICON NAV VERSION
+   =================================================================== */
+
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* ================= THEME VARIABLES ================= */
+:root {
+    /* ===== NỀN CHÍNH (SÁNG – HIỆN ĐẠI) ===== */
+    --bg1: #74ebd5;
+    --bg2: #ACB6E5;
+
+    /* ===== CARD / GLASS ===== */
+    --card: rgba(255, 255, 255, 0.55);
+    --glass: rgba(255, 255, 255, 0.35);
+
+    /* ===== ACCENT (ĐIỂM NHẤN) ===== */
+    --accent: #00c6ff;
+    --accent-strong: #0072ff;
+    --accent-soft: rgba(0, 198, 255, 0.25);
+
+    /* ===== TEXT ===== */
+    --text: #0f172a;
+    --muted: rgba(15, 23, 42, 0.6);
+
+    /* ===== BORDER ===== */
+    --border: rgba(0, 198, 255, 0.35);
+
+    --radius: 16px;
+    --gap: 1rem;
+    --max-width: 1200px;
+
+    --ui-font: "Segoe UI", system-ui, Inter, -apple-system, Roboto, Arial;
+    font-family: var(--ui-font);
+}
+
+/* ================= BODY ================= */
+body {
+    min-height: 100vh;
+    padding-top: 110px; /* header + nav */
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===================================================================
+   HEADER (TOP BAR) – GLASS STYLE
+   =================================================================== */
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 114, 255, 0.12);
+}
+
+.header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo placeholder */
+.logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.3);
+}
+
+/* Search bar – modern pill style */
+.search-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 0 8px rgba(0, 198, 255, 0.15);
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    color: var(--text);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(15, 23, 42, 0.45);
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    color: var(--accent-strong);
+    cursor: pointer;
+}
+
+/* Header icons */
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 7px 9px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px var(--accent);
+}
+
+/* ===================================================================
+   NEW TOP NAVIGATION – ICON ONLY (NO TEXT)
+   =================================================================== */
+
+.top-nav {
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+}
+
+.nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 8px 20px;
+    display: flex;
+    gap: 14px;
+}
+
+/* ICON BUTTON STYLE */
+.nav-item {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.nav-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(0, 198, 255, 0.5);
+}
+
+/* ACTIVE ICON */
+.nav-item.active {
+    background: linear-gradient(135deg, #74ebd5, #00c6ff);
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.7);
+    color: #0f172a;
+}
+
+/* ===================================================================
+   MAIN LAYOUT
+   =================================================================== */
+
+.main {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+/* Container */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================================================
+   CURRENT CARD – GLASS + GLOW
+   =================================================================== */
+
+.current-card {
+    background: linear-gradient(135deg,
+        rgba(255,255,255,0.7),
+        rgba(255,255,255,0.45));
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 25px rgba(0, 198, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+.current-card:hover {
+    box-shadow: 0 10px 35px rgba(0, 198, 255, 0.35);
+}
+
+/* ===================================================================
+   HIGHLIGHTS – BRIGHT & CLEAN
+   =================================================================== */
+
+.highlights {
+    margin-top: 0.9rem;
+}
+
+.high-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+}
+
+@media (max-width: 700px) {
+    .high-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.highlight {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    background: linear-gradient(135deg,
+        rgba(116,235,213,0.55),
+        rgba(172,182,229,0.55));
+    color: var(--text);
+    padding: 0.9rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(0, 198, 255, 0.25);
+    transition: all 0.25s ease;
+}
+
+.highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 198, 255, 0.35);
+}
+
+/* ===================================================================
+   FORECAST – CLEAN & ELEGANT
+   =================================================================== */
+
+.forecast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.forecast-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(90deg,
+        rgba(116,235,213,0.5),
+        rgba(172,182,229,0.5));
+    padding: 0.8rem;
+    border-radius: 14px;
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(0, 198, 255, 0.2);
+    transition: all 0.25s ease;
+}
+
+.forecast-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(0, 198, 255, 0.3);
+}
+
+/* ===================================================================
+   FOOTER
+   =================================================================== */
+
+.footer {
+    padding: 1rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    opacity: 0.85;
+}

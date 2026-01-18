@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="home.css" />
+</head>
+
+<body>
+
+    <!-- ========================= HEADER (TOP BAR) ========================= -->
+    <!-- Chỉ chứa logo + tìm kiếm + các nút hệ thống -->
+    <header class="header">
+        <div class="header-inner">
+
+            <!-- LEFT: LOGO -->
+            <div class="header-left">
+                <div class="logo">
+                    ...  <!-- bạn thay logo ở đây -->
+                </div>
+            </div>
+
+            <!-- CENTER: SEARCH -->
+            <div class="search-wrap">
+                <input class="search-input" type="text" placeholder="Search city..." />
+                <button class="search-btn" aria-label="search">
+                    ...
+                </button>
+            </div>
+
+            <!-- RIGHT: ICON BUTTONS -->
+            <div class="header-right">
+                <button class="icon-btn">...</button> <!-- calendar -->
+                <button class="icon-btn">...</button> <!-- notification -->
+                <button class="icon-btn">...</button> <!-- account -->
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================= NEW TOP NAVIGATION ========================= -->
+    <!-- Thanh điều hướng mới trên cùng (thay thế sidebar cũ) -->
+    <nav class="top-nav">
+        <div class="nav-inner">
+            <button class="nav-item active">Home</button>
+            <button class="nav-item">User</button>
+            <button class="nav-item">Notes</button>
+            <button class="nav-item">Settings</button>
+        </div>
+    </nav>
+
+    <!-- ========================= MAIN LAYOUT ========================= -->
+    <main class="main">
+
+        <div class="container">
+
+            <!-- ================= LEFT COLUMN ================= -->
+            <section class="col-left">
+
+                <!-- CURRENT WEATHER CARD -->
+                <article class="current-card">
+                    <div class="current-left">
+                        <h2 class="city">...CITY...</h2>
+                        <p class="desc">...DESCRIPTION...</p>
+                        <div class="temp">...<span class="deg">°</span></div>
+                    </div>
+
+                    <div class="current-right">
+                        <div class="weather-emoji">...</div>
+                    </div>
+                </article>
+
+                <!-- TODAY HIGHLIGHTS -->
+                <section class="highlights">
+                    <h3>Today's Highlights</h3>
+
+                    <div class="high-grid">
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">Feel Like</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">High temp</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">Low temp</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">Humidity</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">Visibility</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="hi-icon">...</div>
+                            <div>
+                                <div class="hi-label">Cloudy</div>
+                                <div class="hi-value">...</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </section>
+
+            <!-- ================= RIGHT COLUMN (FORECAST) ================= -->
+            <aside class="col-right">
+                <h3>Other Days</h3>
+
+                <div class="forecast-list">
+
+                    <!-- Mẫu 1 item (bạn có thể nhân bản bằng JS sau này) -->
+                    <article class="forecast-item">
+                        <div class="f-left">
+                            <div class="f-emoji">...</div>
+                            <div class="f-day">...</div>
+                        </div>
+                        <div class="f-right">
+                            <div class="f-temp">...</div>
+                            <div class="f-details">...</div>
+                        </div>
+                    </article>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Weather Dashboard — static HTML/CSS version</p>
+    </footer>
+
+</body>
+</html>

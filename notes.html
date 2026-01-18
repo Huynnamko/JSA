@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+
+    <!-- IMPORTANT: import home.css trước, notes.css sau -->
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="notes.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="header-inner">
+            <div class="brand">
+                <h1>WEATHER WEB</h1>
+            </div>
+
+            <div class="menu">
+                <button class="menu-btn">
+                    <a href="home.html">
+                        <img src="./images/Home-removebg-preview.png" alt="Home">
+                    </a>
+                </button>
+
+                <button class="menu-btn">
+                    <a href="userInformation.html">
+                        <img src="./images/name_icon-removebg-preview.png" alt="User">
+                    </a>
+                </button>
+
+                <button class="menu-btn">
+                    <a href="notes.html">
+                        <img src="./images/calendar_icon-removebg-preview.png" alt="Notes">
+                    </a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CARD -->
+    <div class="notes-card">
+
+        <!-- CALENDAR -->
+        <div class="calendar-card">
+            <div class="calendar-header">
+                <button id="prev">‹</button>
+                <span id="monthYear"></span>
+                <button id="next">›</button>
+            </div>
+
+            <div class="calendar-grid">
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+                <div class="weekday">Sun</div>
+            </div>
+        </div>
+
+        <!-- NOTES -->
+        <div class="notes-box">
+
+            <div class="notes-top">
+                <div class="notes-title">User note days</div>
+                <button class="add-note-btn" id="btn_add_note">Add note</button>
+            </div>
+
+            <!-- NOTE LIST -->
+            <div class="notes-list" id="user_note_days"></div>
+
+            <!-- INPUT NOTE INLINE -->
+            <div class="note-input-container" id="noteInputContainer" style="display:none;">
+                <input type="text" id="noteInput" placeholder="Type your note here..." />
+                <button id="saveNoteBtn">Save</button>
+                <button id="cancelNoteBtn">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT (giữ nguyên của bạn) -->
+    <script>
+        let date = new Date();
+        let selectedDate = null;
+        let notes = JSON.parse(localStorage.getItem("notes")) || {};
+
+        const grid = document.querySelector(".calendar-grid");
+        const label = document.getElementById("monthYear");
+        const noteList = document.getElementById("user_note_days");
+
+        const btnAddNote = document.getElementById("btn_add_note");
+        const noteInputContainer = document.getElementById("noteInputContainer");
+        const noteInput = document.getElementById("noteInput");
+        const saveNoteBtn = document.getElementById("saveNoteBtn");
+        const cancelNoteBtn = document.getElementById("cancelNoteBtn");
+
+        function renderCalendar() {
+            grid.querySelectorAll(".day").forEach(d => d.remove());
+
+            const year = date.getFullYear();
+            const month = date.getMonth();
+
+            label.textContent = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+            const firstDay = new Date(year, month, 1);
+            const startDay = (firstDay.getDay() + 6) % 7;
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < startDay; i++) {
+                const empty = document.createElement("div");
+                empty.className = "day other";
+                grid.appendChild(empty);
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const cell = document.createElement("div");
+                cell.className = "day";
+                cell.textContent = d;
+
+                const key =
+                    `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+                const today = new Date();
+                if (d === today.getDate() &&
+                    month === today.getMonth() &&
+                    year === today.getFullYear()) {
+                    cell.classList.add("today");
+                }
+
+                if (notes[key]) {
+                    cell.style.boxShadow = "inset 0 -3px 0 #38bdf8";
+                }
+
+                cell.onclick = () => {
+                    document.querySelectorAll(".day").forEach(x => x.classList.remove("selected"));
+                    cell.classList.add("selected");
+                    selectedDate = key;
+                    renderNotes();
+                    noteInputContainer.style.display = "none";
+                };
+
+                grid.appendChild(cell);
+            }
+        }
+
+        function renderNotes() {
+            noteList.innerHTML = "";
+
+            if (!selectedDate || !notes[selectedDate]) return;
+
+            notes[selectedDate].forEach((text, index) => {
+                const item = document.createElement("div");
+                item.className = "note-item";
+
+                item.innerHTML = `
+                    <div class="note-content">
+                        <div class="note-date">${selectedDate}</div>
+                        <div class="note-text">${text}</div>
+                    </div>
+                `;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "note-delete-btn";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => {
+                    notes[selectedDate].splice(index, 1);
+                    if (notes[selectedDate].length === 0) delete notes[selectedDate];
+                    localStorage.setItem("notes", JSON.stringify(notes));
+                    renderNotes();
+                    renderCalendar();
+                };
+
+                item.appendChild(deleteBtn);
+                noteList.appendChild(item);
+            });
+        }
+
+        btnAddNote.onclick = () => {
+            if (!selectedDate) {
+                alert("Please select a day first");
+                return;
+            }
+            noteInput.value = "";
+            noteInputContainer.style.display = "flex";
+            noteInput.focus();
+        };
+
+        saveNoteBtn.onclick = () => {
+            const text = noteInput.value.trim();
+            if (!text) return;
+
+            if (!notes[selectedDate]) notes[selectedDate] = [];
+            notes[selectedDate].push(text);
+            localStorage.setItem("notes", JSON.stringify(notes));
+
+            noteInputContainer.style.display = "none";
+            renderNotes();
+            renderCalendar();
+        };
+
+        cancelNoteBtn.onclick = () => {
+            noteInputContainer.style.display = "none";
+        };
+
+        document.getElementById("prev").onclick = () => {
+            date.setMonth(date.getMonth() - 1);
+            renderCalendar();
+        };
+
+        document.getElementById("next").onclick = () => {
+            date.setMonth(date.getMonth() + 1);
+            renderCalendar();
+        };
+
+        renderCalendar();
+    </script>
+
+</body>
+
+</html>

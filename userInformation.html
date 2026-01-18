@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+
+    <!-- IMPORTANT: import home.css trước, userInformation.css sau -->
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="userInformation.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="header-inner">
+            <div class="brand">
+                <h1>WEATHER WEB</h1>
+            </div>
+
+            <div class="menu">
+                <button class="menu-btn">
+                    <a href="home.html">
+                        <img src="./images/Home-removebg-preview.png" alt="Home">
+                    </a>
+                </button>
+
+                <button class="menu-btn">
+                    <a href="userInformation.html">
+                        <img src="./images/name_icon-removebg-preview.png" alt="User">
+                    </a>
+                </button>
+
+                <button class="menu-btn">
+                    <a href="notes.html">
+                        <img src="./images/calendar_icon-removebg-preview.png" alt="Notes">
+                    </a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+        <div class="user-grid">
+
+            <!-- AVATAR -->
+            <div class="avatar-box">
+                <img id="img_avatar" src="img/circle-user-regular.svg" alt="avatar">
+                <button id="btn_avatar">Change avatar</button>
+            </div>
+
+            <!-- USER INFORMATION -->
+            <form class="form">
+
+                <div class="field">
+                    <label for="txt_name">User's name</label>
+                    <input id="txt_name" type="text">
+                </div>
+
+                <div class="field">
+                    <label for="txt_birthday">Birthday</label>
+                    <input id="txt_birthday" type="date">
+                </div>
+
+                <div class="field">
+                    <label for="txt_gender">Gender</label>
+                    <select id="txt_gender">
+                        <option>None</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="txt_email">Email Address</label>
+                    <input id="txt_email" type="email">
+                </div>
+
+                <div class="actions">
+                    <button class="save-btn" id="btn_edit">Edit</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>
