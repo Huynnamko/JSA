@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information</title>
-
+    <link rel="icon" href="images/weather icon.png">
     <!-- IMPORTANT: import home.css trước, userInformation.css sau -->
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="userInformation.css">
@@ -38,6 +38,12 @@
                         <img src="./images/calendar_icon-removebg-preview.png" alt="Notes">
                     </a>
                 </button>
+
+                <button class="menu-btn" id="btn_logout">
+                    <a href="#" onclick="logoutUser()">
+                        <img src="./images/logout-removebg-preview.png" alt="Logout">
+                    </a>
+                </button>
             </div>
         </div>
     </header>
@@ -45,12 +51,6 @@
     <!-- MAIN CARD -->
     <div class="card">
         <div class="user-grid">
-
-            <!-- AVATAR -->
-            <div class="avatar-box">
-                <img id="img_avatar" src="img/circle-user-regular.svg" alt="avatar">
-                <button id="btn_avatar">Change avatar</button>
-            </div>
 
             <!-- USER INFORMATION -->
             <form class="form">
@@ -89,5 +89,33 @@
         </div>
     </div>
 
+    <script>
+        // Load user data from localStorage on page load
+        window.addEventListener('DOMContentLoaded', function () {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            // If no user logged in, redirect to login
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Fill form with user data
+            document.getElementById('txt_name').value = currentUser.name || '';
+            document.getElementById('txt_email').value = currentUser.email || '';
+            document.getElementById('txt_birthday').value = currentUser.birthday || '';
+            document.getElementById('txt_gender').value = currentUser.gender || 'None';
+        });
+
+        // Logout function
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+
 </body>
+
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes</title>
-
+    <link rel="icon" href="images/weather icon.png">
     <!-- IMPORTANT: import home.css trước, notes.css sau -->
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="notes.css">
@@ -85,11 +85,12 @@
         </div>
     </div>
 
-    <!-- SCRIPT (giữ nguyên của bạn) -->
+    <!-- SCRIPT -->
     <script>
         let date = new Date();
         let selectedDate = null;
-        let notes = JSON.parse(localStorage.getItem("notes")) || {};
+        let currentUser = null;
+        let allUserNotes = {};
 
         const grid = document.querySelector(".calendar-grid");
         const label = document.getElementById("monthYear");
@@ -100,6 +101,34 @@
         const noteInput = document.getElementById("noteInput");
         const saveNoteBtn = document.getElementById("saveNoteBtn");
         const cancelNoteBtn = document.getElementById("cancelNoteBtn");
+
+        // Load user from localStorage on page load
+        window.addEventListener('DOMContentLoaded', function () {
+            currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            // If no user logged in, redirect to login
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load all user notes from localStorage
+            allUserNotes = JSON.parse(localStorage.getItem('allUserNotes')) || {};
+
+            renderCalendar();
+        });
+
+        function getUserNotes() {
+            if (!currentUser) return {};
+            if (!allUserNotes[currentUser.email]) {
+                allUserNotes[currentUser.email] = {};
+            }
+            return allUserNotes[currentUser.email];
+        }
+
+        function saveAllNotes() {
+            localStorage.setItem('allUserNotes', JSON.stringify(allUserNotes));
+        }
 
         function renderCalendar() {
             grid.querySelectorAll(".day").forEach(d => d.remove());
@@ -113,6 +142,8 @@
             const startDay = (firstDay.getDay() + 6) % 7;
             const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+            const currentUserNotes = getUserNotes();
+
             for (let i = 0; i < startDay; i++) {
                 const empty = document.createElement("div");
                 empty.className = "day other";
@@ -124,8 +155,7 @@
                 cell.className = "day";
                 cell.textContent = d;
 
-                const key =
-                    `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+                const key = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 
                 const today = new Date();
                 if (d === today.getDate() &&
@@ -134,7 +164,7 @@
                     cell.classList.add("today");
                 }
 
-                if (notes[key]) {
+                if (currentUserNotes[key]) {
                     cell.style.boxShadow = "inset 0 -3px 0 #38bdf8";
                 }
 
@@ -153,9 +183,11 @@
         function renderNotes() {
             noteList.innerHTML = "";
 
-            if (!selectedDate || !notes[selectedDate]) return;
+            const currentUserNotes = getUserNotes();
 
-            notes[selectedDate].forEach((text, index) => {
+            if (!selectedDate || !currentUserNotes[selectedDate]) return;
+
+            currentUserNotes[selectedDate].forEach((text, index) => {
                 const item = document.createElement("div");
                 item.className = "note-item";
 
@@ -170,9 +202,12 @@
                 deleteBtn.className = "note-delete-btn";
                 deleteBtn.textContent = "Delete";
                 deleteBtn.onclick = () => {
+                    const notes = getUserNotes();
                     notes[selectedDate].splice(index, 1);
-                    if (notes[selectedDate].length === 0) delete notes[selectedDate];
-                    localStorage.setItem("notes", JSON.stringify(notes));
+                    if (notes[selectedDate].length === 0) {
+                        delete notes[selectedDate];
+                    }
+                    saveAllNotes();
                     renderNotes();
                     renderCalendar();
                 };
@@ -196,9 +231,13 @@
             const text = noteInput.value.trim();
             if (!text) return;
 
-            if (!notes[selectedDate]) notes[selectedDate] = [];
+            const notes = getUserNotes();
+            if (!notes[selectedDate]) {
+                notes[selectedDate] = [];
+            }
             notes[selectedDate].push(text);
-            localStorage.setItem("notes", JSON.stringify(notes));
+            allUserNotes[currentUser.email] = notes;
+            saveAllNotes();
 
             noteInputContainer.style.display = "none";
             renderNotes();
@@ -218,8 +257,6 @@
             date.setMonth(date.getMonth() + 1);
             renderCalendar();
         };
-
-        renderCalendar();
     </script>
 
 </body>

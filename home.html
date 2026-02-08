@@ -4,158 +4,298 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Weather Dashboard</title>
+    <title>Weather Home</title>
     <link rel="stylesheet" href="home.css" />
+    <link rel="icon" href="images/weather icon.png">
 </head>
 
 <body>
 
-    <!-- ========================= HEADER (TOP BAR) ========================= -->
-    <!-- Chỉ chứa logo + tìm kiếm + các nút hệ thống -->
+    <!-- ========================= HEADER ========================= -->
     <header class="header">
         <div class="header-inner">
-
-            <!-- LEFT: LOGO -->
-            <div class="header-left">
-                <div class="logo">
-                    ...  <!-- bạn thay logo ở đây -->
-                </div>
+            <div class="header-brand">
+                <h1>WEATHER</h1>
             </div>
 
-            <!-- CENTER: SEARCH -->
             <div class="search-wrap">
-                <input class="search-input" type="text" placeholder="Search city..." />
-                <button class="search-btn" aria-label="search">
-                    ...
+                <input id="city" class="search-input" type="text" placeholder="Search city..." />
+                <button id="searchBtn" class="search-btn" aria-label="search">
+                    <img src="images/magnifying_glass_icon-removebg-preview.png" alt="">
                 </button>
             </div>
 
-            <!-- RIGHT: ICON BUTTONS -->
             <div class="header-right">
-                <button class="icon-btn">...</button> <!-- calendar -->
-                <button class="icon-btn">...</button> <!-- notification -->
-                <button class="icon-btn">...</button> <!-- account -->
+                <a href="notes.html" class="icon-btn" aria-label="calendar">
+                    <img src="images/calendar_icon-removebg-preview.png" alt="Calendar">
+                </a>
+                <a href="userInformation.html" class="icon-btn" aria-label="account">
+                    <img src="images/name_icon-removebg-preview.png" alt="User Account">
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- ========================= NEW TOP NAVIGATION ========================= -->
-    <!-- Thanh điều hướng mới trên cùng (thay thế sidebar cũ) -->
-    <nav class="top-nav">
-        <div class="nav-inner">
-            <button class="nav-item active">Home</button>
-            <button class="nav-item">User</button>
-            <button class="nav-item">Notes</button>
-            <button class="nav-item">Settings</button>
-        </div>
-    </nav>
 
-    <!-- ========================= MAIN LAYOUT ========================= -->
+    <!-- ========================= MAIN ========================= -->
     <main class="main">
-
         <div class="container">
 
-            <!-- ================= LEFT COLUMN ================= -->
-            <section class="col-left">
-
-                <!-- CURRENT WEATHER CARD -->
+            <!-- CURRENT WEATHER -->
+            <section class="current-section">
                 <article class="current-card">
                     <div class="current-left">
-                        <h2 class="city">...CITY...</h2>
-                        <p class="desc">...DESCRIPTION...</p>
-                        <div class="temp">...<span class="deg">°</span></div>
+                        <h2 id="cityName" class="city">...CITY...</h2>
+                        <p id="desc" class="desc">...DESCRIPTION...</p>
+                        <div id="temp" class="temp">...<span class="deg">°</span></div>
                     </div>
-
                     <div class="current-right">
-                        <div class="weather-emoji">...</div>
+                        <img id="currentIcon" alt="weather icon" style="width:120px;height:120px;">
                     </div>
                 </article>
-
-                <!-- TODAY HIGHLIGHTS -->
-                <section class="highlights">
-                    <h3>Today's Highlights</h3>
-
-                    <div class="high-grid">
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">Feel Like</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">High temp</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">Low temp</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">Humidity</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">Visibility</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                        <div class="highlight">
-                            <div class="hi-icon">...</div>
-                            <div>
-                                <div class="hi-label">Cloudy</div>
-                                <div class="hi-value">...</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
             </section>
 
-            <!-- ================= RIGHT COLUMN (FORECAST) ================= -->
-            <aside class="col-right">
-                <h3>Other Days</h3>
-
-                <div class="forecast-list">
-
-                    <!-- Mẫu 1 item (bạn có thể nhân bản bằng JS sau này) -->
-                    <article class="forecast-item">
-                        <div class="f-left">
-                            <div class="f-emoji">...</div>
-                            <div class="f-day">...</div>
+            <!-- TODAY HIGHLIGHTS -->
+            <section class="highlights-section">
+                <h3>Today's Highlights</h3>
+                <div class="high-grid">
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/compass.png" alt="">
                         </div>
-                        <div class="f-right">
-                            <div class="f-temp">...</div>
-                            <div class="f-details">...</div>
+                        <div>
+                            <div class="hi-label">Feel Like</div>
+                            <div id="feelLike" class="hi-value">...</div>
                         </div>
-                    </article>
+                    </div>
 
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/high_temp-removebg-preview.png" alt="">
+                        </div>
+                        <div>
+                            <div class="hi-label">High temp</div>
+                            <div id="highTemp" class="hi-value">...</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/low_temp-removebg-preview.png" alt="">
+                        </div>
+                        <div>
+                            <div class="hi-label">Low temp</div>
+                            <div id="lowTemp" class="hi-value">...</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/humidity.png" alt="">
+                        </div>
+                        <div>
+                            <div class="hi-label">Humidity</div>
+                            <div id="humidity" class="hi-value">...</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/visibility-removebg-preview.png" alt="">
+                        </div>
+                        <div>
+                            <div class="hi-label">Visibility</div>
+                            <div id="visibility" class="hi-value">...</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <div class="hi-icon">
+                            <img src="images/wind-removebg-preview.png" alt="">
+                        </div>
+                        <div>
+                            <div class="hi-label">Cloudy</div>
+                            <div id="cloudy" class="hi-value">...</div>
+                        </div>
+                    </div>
                 </div>
-            </aside>
+            </section>
+
+            <!-- FORECAST -->
+            <section class="forecast-section">
+                <h3>5-Day Forecast</h3>
+                <div id="forecastList" class="forecast-list"></div>
+            </section>
 
         </div>
     </main>
 
-    <footer class="footer">
-        <p>Weather Dashboard — static HTML/CSS version</p>
-    </footer>
+    <script>
+        // ---------- CẤU HÌNH ----------
+        const apiKey = "5634849698f284eba828945eec5edfee"; // bạn có thể thay thế
+        const defaultCity = "Ho Chi Minh";
+
+        // ---------- HELPER ----------
+        function el(id) { return document.getElementById(id); }
+        function formatTemp(t) { return Math.round(t) + "°C"; }
+        function formatKm(meters) {
+            if (meters == null) return '—';
+            return (meters / 1000).toFixed(1) + " km";
+        }
+        function dayName(dateString) {
+            const d = new Date(dateString);
+            return d.toLocaleDateString(undefined, { weekday: 'short' }); // Mon, Tue...
+        }
+
+        // ---------- RENDER ----------
+        function renderCurrent(data) {
+            if (!data) return;
+            el("cityName").textContent = `${data.name}${data.sys && data.sys.country ? ', ' + data.sys.country : ''}`;
+            el("desc").textContent = data.weather && data.weather[0] ? data.weather[0].description : '';
+            el("temp").innerHTML = formatTemp(data.main.temp);
+            if (data.weather && data.weather[0]) {
+                el("currentIcon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+                el("currentIcon").alt = data.weather[0].description;
+            }
+
+            el("feelLike").textContent = data.main && data.main.feels_like != null ? formatTemp(data.main.feels_like) : '—';
+            el("highTemp").textContent = data.main && data.main.temp_max != null ? formatTemp(data.main.temp_max) : '—';
+            el("lowTemp").textContent = data.main && data.main.temp_min != null ? formatTemp(data.main.temp_min) : '—';
+            el("humidity").textContent = data.main && data.main.humidity != null ? data.main.humidity + '%' : '—';
+            el("visibility").textContent = data.visibility != null ? formatKm(data.visibility) : '—';
+            el("cloudy").textContent = data.clouds && data.clouds.all != null ? data.clouds.all + '%' : '—';
+        }
+
+        function renderForecast(forecastData) {
+            const container = el("forecastList");
+            container.innerHTML = ""; // xóa cũ
+
+            if (!forecastData || !forecastData.list) {
+                container.innerHTML = "<p>No forecast data</p>";
+                return;
+            }
+
+            // Gom theo ngày: chọn entry gần giờ 12:00:00 (noon) cho mỗi ngày
+            const groups = {};
+            forecastData.list.forEach(item => {
+                const dateKey = item.dt_txt.split(' ')[0]; // YYYY-MM-DD
+                if (!groups[dateKey]) groups[dateKey] = [];
+                groups[dateKey].push(item);
+            });
+
+            const dates = Object.keys(groups).sort(); // ngày tăng dần
+            // Bỏ ngày hôm nay (thứ user có thể muốn), nhưng mình sẽ hiển thị từ ngày kế tiếp để tránh lặp current
+            const todayKey = (new Date()).toISOString().split('T')[0];
+
+            let shown = 0;
+            for (let i = 0; i < dates.length && shown < 5; i++) {
+                const date = dates[i];
+                if (date === todayKey) continue; // bỏ hôm nay
+                const arr = groups[date];
+
+                // chọn mục gần 12:00:00
+                let pick = arr.reduce((best, curr) => {
+                    const targetHour = 12;
+                    const currHour = new Date(curr.dt_txt).getHours();
+                    const bestHour = best ? new Date(best.dt_txt).getHours() : 100;
+                    return (Math.abs(currHour - targetHour) < Math.abs(bestHour - targetHour)) ? curr : best;
+                }, null);
+
+                if (!pick) pick = arr[0];
+
+                // tạo DOM
+                const art = document.createElement("article");
+                art.className = "forecast-item";
+
+                art.innerHTML = `
+                    <div class="f-left">
+                        <div class="f-emoji">
+                            <img src="https://openweathermap.org/img/wn/${pick.weather[0].icon}@2x.png" alt="${pick.weather[0].description}" style="width:44px;height:44px;">
+                        </div>
+                        <div class="f-day">${dayName(pick.dt_txt)}</div>
+                    </div>
+                    <div class="f-right">
+                        <div class="f-temp">${Math.round(pick.main.temp)}°C</div>
+                        <div class="f-details">${pick.weather[0].main} · ${Math.round(pick.main.temp_min)}°/${Math.round(pick.main.temp_max)}°</div>
+                    </div>
+                `;
+
+                container.appendChild(art);
+                shown++;
+            }
+
+            if (shown === 0) {
+                container.innerHTML = "<p>No upcoming days found</p>";
+            }
+        }
+
+        // ---------- FETCH ----------
+        async function getWeather(city = defaultCity) {
+            try {
+                // show loading placeholders (tối giản)
+                el("cityName").textContent = "Loading...";
+                el("desc").textContent = "";
+                el("temp").textContent = "...";
+                el("currentIcon").src = "";
+                el("forecastList").innerHTML = "<p>Loading...</p>";
+
+                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+                const [resWeather, resForecast] = await Promise.all([
+                    fetch(weatherUrl),
+                    fetch(forecastUrl)
+                ]);
+
+                if (!resWeather.ok) {
+                    const err = await resWeather.json().catch(()=>({message:'Failed'}));
+                    throw new Error(err.message || `Weather API error (status ${resWeather.status})`);
+                }
+                if (!resForecast.ok) {
+                    const err = await resForecast.json().catch(()=>({message:'Failed'}));
+                    throw new Error(err.message || `Forecast API error (status ${resForecast.status})`);
+                }
+
+                const dataWeather = await resWeather.json();
+                const dataForecast = await resForecast.json();
+
+                renderCurrent(dataWeather);
+                renderForecast(dataForecast);
+
+            } catch (err) {
+                console.error(err);
+                alert("Không thể tải dữ liệu thời tiết: " + (err.message || err));
+                // đặt lại những ô
+                el("cityName").textContent = "—";
+                el("desc").textContent = "—";
+                el("temp").textContent = "—";
+                el("currentIcon").src = "";
+                el("forecastList").innerHTML = "<p>Error loading forecast</p>";
+            }
+        }
+
+        // ---------- UI EVENTS ----------
+        document.getElementById("searchBtn").addEventListener("click", () => {
+            const city = el("city").value.trim();
+            if (city) getWeather(city);
+        });
+
+        // Enter key trong input
+        document.getElementById("city").addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                const city = el("city").value.trim();
+                if (city) getWeather(city);
+            }
+        });
+
+        // load mặc định
+        window.addEventListener("load", () => {
+            // nếu input rỗng thì hiển thị defaultCity
+            if (!el("city").value) el("city").value = defaultCity;
+            getWeather(el("city").value || defaultCity);
+        });
+
+    </script>
 
 </body>
 </html>
